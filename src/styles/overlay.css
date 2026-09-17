@@ -1,0 +1,80 @@
+:root { color-scheme: dark; }
+[hidden] { display: none !important; }
+.overlay-page { margin: 0; background: transparent; overflow: hidden; }
+.opponent-card {
+  --overlay-bg: #191a1df2;
+  --overlay-border: #383633;
+  --overlay-text: #f1eee8;
+  --overlay-muted: #b7b2a9;
+  --overlay-accent: #f4b36a;
+  --overlay-secondary: var(--overlay-accent);
+  --overlay-divider: #ffffff14;
+  box-sizing: border-box;
+  width: 390px;
+  max-width: 100%;
+  padding: 17px 19px 13px;
+  border: 1px solid var(--overlay-border);
+  border-left: 3px solid var(--overlay-accent);
+  border-radius: 5px;
+  background: var(--overlay-bg);
+  color: var(--overlay-text);
+  font: 13px/1.4 "Segoe UI", system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+}
+.opponent-identity { display: flex; align-items: center; gap: 12px; }
+.opponent-head { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 3px; image-rendering: pixelated; background: #2b2824; }
+.opponent-title { min-width: 0; flex: 1; }
+.opponent-eyebrow { display: block; font-size: 9px; font-weight: 600; letter-spacing: .15em; color: var(--overlay-muted); margin-bottom: 2px; }
+.opponent-name { display: block; font-size: 21px; line-height: 1.25; font-weight: 650; overflow-wrap: anywhere; }
+.opponent-live { flex: 0 0 5px; height: 5px; background: var(--overlay-accent); border-radius: 50%; align-self: flex-start; margin-top: 4px; }
+.opponent-metrics { display: flex; flex-wrap: wrap; gap: 14px 20px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--overlay-divider); }
+.opponent-metric { flex: 1 0 auto; }
+.metric-label { display: block; font-size: 8px; font-weight: 600; letter-spacing: .08em; color: var(--overlay-muted); margin-bottom: 4px; }
+.opponent-metric strong { font-size: 15px; font-weight: 600; white-space: nowrap; }
+[data-value="record"] { color: var(--overlay-secondary); }
+.opponent-rank { color: var(--overlay-muted); font-size: 10px; margin-left: 6px; white-space: nowrap; }
+.opponent-twitch { display: flex; align-items: center; gap: 7px; color: var(--overlay-muted); font-size: 11px; margin-top: 12px; overflow-wrap: anywhere; }
+.opponent-twitch svg { flex-shrink: 0; }
+
+.opponent-card[data-theme="neon-dusk"] {
+  --overlay-bg: #21172ff5;
+  --overlay-border: #554064;
+  --overlay-text: #faf5ff;
+  --overlay-muted: #cec0df;
+  --overlay-accent: #70ddff;
+  --overlay-secondary: #ff9ad5;
+  --overlay-divider: #ad8fce38;
+}
+.opponent-card[data-theme="light"] {
+  --overlay-bg: #f5f5f4;
+  --overlay-border: #cececa;
+  --overlay-text: #161719;
+  --overlay-muted: #55585c;
+  --overlay-accent: #41454b;
+  --overlay-secondary: #30343b;
+  --overlay-divider: #22222225;
+}
+.opponent-card[data-theme="forest"] {
+  --overlay-bg: #142621f5;
+  --overlay-border: #375b4a;
+  --overlay-text: #eff8f1;
+  --overlay-muted: #b4cbbd;
+  --overlay-accent: #8cdfac;
+  --overlay-secondary: #b7e4b0;
+  --overlay-divider: #91c5a42e;
+}
+.opponent-card[data-theme="transparent"] {
+  --overlay-bg: transparent;
+  --overlay-border: transparent;
+  --overlay-text: #fff;
+  --overlay-muted: #fff;
+  --overlay-accent: #fff;
+  --overlay-secondary: #fff;
+  --overlay-divider: transparent;
+  /* Keep the same dimensions as other themes, without a visible panel. */
+  border-color: transparent;
+  text-shadow: -1px -1px 0 #101114, 1px -1px 0 #101114, -1px 1px 0 #101114, 1px 1px 0 #101114, 0 1px 3px #000;
+}
+.opponent-card[data-theme="transparent"] .opponent-twitch svg,
+.opponent-card[data-theme="transparent"] .opponent-live { filter: drop-shadow(0 1px 1px #000) drop-shadow(0 -1px 1px #000); }

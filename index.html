@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111214">
+    <meta name="description" content="A minimal MCSR Ranked opponent overlay for Toolscreen. Choose your stats, copy your link, and get back to the run.">
+    <title>Opponent — MCSR Ranked overlay</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  </head>
+  <body>
+    <a class="skip-link" href="#setup">Skip to setup</a>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="Opponent home"><span class="brand-mark" aria-hidden="true">o<span>.</span></span><span>opponent<span class="brand-period">.</span></span></a>
+        <span class="header-label">BUILT FOR MCSR RANKED</span>
+        <a class="header-link" href="#how-it-works">Setup guide <span aria-hidden="true">↗</span></a>
+      </header>
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <h1 id="hero-title">No more <strong><span>[Opponent]</span></strong></h1>
+          <p class="hero-description">This overlay attempts to counter the "Opponent meta": using the paid perk to hide your username from your opponents. To do so, it makes use of the MCSR Ranked API to display it.</p>
+          <p class="hero-description">You can also have a few more stats displayed, if you wish... Or just keep it simple.</p>
+        </section>
+
+        <aside class="stream-notice" aria-label="Streaming requirement"><span class="notice-icon" aria-hidden="true">i</span><div><strong>One of you needs to be streaming.</strong><p>At least one player must be live on Twitch with <b>Public Stream</b> enabled in Ranked.</p></div><a href="#stream-help">How to enable it <span aria-hidden="true">↗</span></a></aside>
+
+        <div class="workspace">
+          <section class="setup-panel" id="setup" aria-labelledby="setup-title">
+            <div class="section-heading"><span class="step-number">01</span><h2 id="setup-title">Configure Your Overlay</h2><span class="section-meta">NO SIGN-IN NEEDED</span></div>
+            <form id="setup-form">
+              <label class="field-label" for="username">Your Minecraft username</label>
+              <div class="username-input"><span aria-hidden="true">&gt;_</span><input id="username" name="username" type="text" placeholder="e.g. Nickyux" required minlength="3" maxlength="16" pattern="[a-zA-Z0-9_]{3,16}" autocomplete="off" spellcheck="false" aria-describedby="username-help form-status"></div>
+              <p id="username-help" class="field-help">Your username, so we can find your opponent.</p>
+              <fieldset class="display-options"><legend>ON YOUR OVERLAY <span>Current season</span></legend>
+                <label class="option-row"><span class="option-icon" aria-hidden="true">▧</span><span class="option-copy"><strong>Player head</strong><span>Your opponent's Minecraft skin</span></span><input type="checkbox" name="head" checked><span class="toggle" aria-hidden="true"></span></label>
+                <label class="option-row"><span class="option-icon icon-versus" aria-hidden="true">VS</span><span class="option-copy"><strong>Head to head</strong><span>Your wins, draws, and losses against them</span></span><input type="checkbox" name="headToHead" checked><span class="toggle" aria-hidden="true"></span></label>
+                <label class="option-row"><span class="option-icon" aria-hidden="true">%</span><span class="option-copy"><strong>Win rate</strong><span>Their wins out of all matches this season</span></span><input type="checkbox" name="wr" checked><span class="toggle" aria-hidden="true"></span></label>
+                <label class="option-row"><span class="option-icon" aria-hidden="true">#</span><span class="option-copy"><strong>Elo &amp; rank</strong><span>Their rating and leaderboard position</span></span><input type="checkbox" name="elo" checked><span class="toggle" aria-hidden="true"></span></label>
+                <label class="option-row"><span class="option-icon" aria-hidden="true">↗</span><span class="option-copy"><strong>Twitch</strong><span>Their channel name, when public</span></span><input type="checkbox" name="twitch" checked><span class="toggle" aria-hidden="true"></span></label>
+              </fieldset>
+              <fieldset class="theme-options"><legend>APPEARANCE</legend>
+                <div class="theme-grid">
+                  <label class="theme-choice" data-theme="dark-amber"><input type="radio" name="theme" value="dark-amber" checked><span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i></span><span>Dark amber<small>Charcoal &amp; warm orange</small></span><span class="theme-check" aria-hidden="true">✓</span></label>
+                  <label class="theme-choice" data-theme="neon-dusk"><input type="radio" name="theme" value="neon-dusk"><span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i></span><span>Neon dusk<small>Purple, blue &amp; pink</small></span><span class="theme-check" aria-hidden="true">✓</span></label>
+                  <label class="theme-choice" data-theme="light"><input type="radio" name="theme" value="light"><span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i></span><span>Paper<small>Light gray &amp; black text</small></span><span class="theme-check" aria-hidden="true">✓</span></label>
+                  <label class="theme-choice" data-theme="transparent"><input type="radio" name="theme" value="transparent" aria-describedby="transparent-help"><span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i></span><span>Clear<small>Outlined text, no panel</small></span><span class="theme-check" aria-hidden="true">✓</span></label>
+                  <label class="theme-choice" data-theme="forest"><input type="radio" name="theme" value="forest"><span class="theme-swatches" aria-hidden="true"><i></i><i></i><i></i></span><span>Forest<small>Deep green &amp; soft mint</small></span><span class="theme-check" aria-hidden="true">✓</span></label>
+                </div>
+              </fieldset>
+              <button class="primary-button" id="generate" type="submit"><span id="generate-label">Generate overlay link</span><span aria-hidden="true">↗</span></button>
+              <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </section>
+
+          <div class="preview-column">
+            <section class="preview-panel" aria-labelledby="preview-title"><div class="section-heading"><span class="step-number">02</span><h2 id="preview-title">Preview</h2><div class="preview-modes" role="group" aria-label="Preview state"><button type="button" id="preview-match" aria-pressed="true">In a match</button><button type="button" id="preview-idle" aria-pressed="false">Idle</button></div></div>
+              <div class="preview-canvas"><div class="canvas-corner top-left"></div><div class="canvas-corner bottom-right"></div><div id="overlay-preview"></div><p id="idle-hint" hidden>Nothing here. That's the point.<span>Your game stays in view until a match appears.</span></p><span class="canvas-caption">TRANSPARENT BACKGROUND</span></div>
+              <div class="preview-caption"><span>Sample player &amp; stats</span><span>Updates as you choose <span aria-hidden="true">↖</span></span></div>
+              <p id="transparent-help" class="theme-help" hidden>Clear outlines the text, but contrast depends on gameplay. Choose a solid theme if it is hard to read.</p>
+            </section>
+            <section class="link-panel" aria-labelledby="link-title"><div class="section-heading"><span class="step-number">03</span><h2 id="link-title">Copy. Paste. Race.</h2></div><div id="link-empty" class="link-placeholder"><span aria-hidden="true">↳</span> Your personal overlay link will appear here.</div><div id="link-result" hidden><label for="overlay-url" class="visually-hidden">Your overlay URL</label><div class="copy-row"><input id="overlay-url" readonly spellcheck="false"><button id="copy-link" type="button">Copy link</button></div><div class="link-actions"><a id="open-overlay" target="_blank" rel="noopener noreferrer">Open overlay <span aria-hidden="true">↗</span></a><span id="resolved-account"></span></div><p id="copy-status" role="status" aria-live="polite"></p></div></section>
+          </div>
+            <section class="toolscreen-panel" id="toolscreen-settings" aria-labelledby="toolscreen-title">
+              <p class="eyebrow">IN TOOLSCREEN</p><h2 id="toolscreen-title">Put it in the usual spot.</h2>
+              <p class="toolscreen-intro">Add a browser overlay, paste your link, then use these settings.</p>
+              <div class="size-recommendation"><span>Size for your selections</span><strong id="recommended-size" aria-live="polite">390 × 170</strong><span>px</span></div>
+              <table class="size-table"><caption>Browser overlay sizes (width × height)</caption><tbody><tr><th scope="row">Full, with Twitch</th><td>390 × 170</td></tr><tr><th scope="row">Full, without Twitch</th><td>390 × 140</td></tr><tr><th scope="row">Slim</th><td>390 × 76</td></tr></tbody></table>
+              <p class="toolscreen-note">Slim: name and optional head only.</p>
+              <div class="position-settings"><h3>Default MCSR Ranked position</h3><dl><div><dt>Relative to</dt><dd>Top Right (Screen)</dd></div><div><dt>X</dt><dd>−10</dd></div><div><dt>Y</dt><dd>215</dd></div></dl></div>
+              <p class="toolscreen-toggles"><span aria-hidden="true">✓</span> Enable <strong>Transparent</strong><br><span aria-hidden="true">✓</span> Enable <strong>Refresh on Update</strong><small>Keep both enabled with every theme.</small></p>
+            </section>
+        </div>
+
+        <section class="guide" id="how-it-works" aria-labelledby="guide-title"><p class="eyebrow">READY WHEN YOU ARE</p><h2 id="guide-title">From here to your next match.</h2><div class="guide-grid"><article id="stream-help"><span class="guide-number">01 / PUBLIC STREAM</span><h3>Make the match visible.</h3><p>Link Twitch to your MCSR Ranked profile, make the connection public, enable <strong>Public Stream</strong> in Ranked settings, and go live. Either player's public stream can make the match visible.</p></article><article><span class="guide-number">02 / TOOLSCREEN</span><h3>Give it a corner.</h3><p>Add a browser overlay in Toolscreen and paste your generated URL. Enable <strong>Transparent</strong> and <strong>Refresh on Update</strong>. Use <strong>Top Right (Screen)</strong> with <strong>X −10, Y 215</strong> for the usual opponent position. <a href="#toolscreen-settings">See sizes and settings ↗</a></p></article><article><span class="guide-number">03 / PLAY</span><h3>Let the overlay follow.</h3><p>It checks for your match automatically and disappears when the match leaves the feed. Updates are usually within about 10 seconds; API delays can take longer.</p></article></div></section>
+        <details class="faq"><summary>Why is my overlay empty?<span aria-hidden="true">+</span></summary><p>That's normal between visible matches. Check your username and make sure at least one player is streaming with Public Stream enabled. If the API is temporarily unavailable, the overlay retries automatically and may stay invisible until it recovers. A missing Twitch account or statistic won't stop the other fields from showing.</p><p>The public API may omit matches or player identities. Showing a name hidden in-game depends on what the API exposes.</p></details>
+
+        <section class="more-info" aria-labelledby="more-info">
+            <h2>The Purpose</h2>
+            <p>Hopefully this acts as a "counter" to the "Opponent meta" and makes it no longer viable for top-level speedrunners to use that to hide their name. This will hopefully also make the MCSR Ranked team reconsider the paid perk of hiding your username to your opponents.</p>
+        </section>
+      </main>
+      <footer><span class="footer-brand">opponent.</span><p>An independent tool for the MCSR Ranked community.</p><div><a href="https://docs.mcsrranked.com/" target="_blank" rel="noopener noreferrer">Ranked API ↗</a><a href="https://mc-heads.net/" target="_blank" rel="noopener noreferrer">Heads by MCHeads ↗</a><a href="https://github.com/nmsturcke/MCSRRanked-Opponent-Overlay" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></footer>
+    </div>
+    <script type="module" src="./src/setup.ts"></script>
+  </body>
+</html>
